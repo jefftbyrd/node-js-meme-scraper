@@ -25,6 +25,9 @@ async function scrapeMemes() {
             fs.writeFileSync(`memes/${fileName + 1}.jpg`, response.data);
           } else {
           }
+        })
+        .catch(function (error) {
+          console.log(error);
         });
     });
   } catch (error) {
