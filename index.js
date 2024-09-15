@@ -32,4 +32,4 @@ async function scrapeMemes() {
   }
 }
 
-await scrapeMemes();
+scrapeMemes();
