@@ -2,19 +2,19 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import fs from 'fs';
 
+const memeImages = [];
+const fileNames = [];
+
+if (!fs.existsSync('memes')) {
+  fs.mkdirSync('memes');
+}
+
 async function scrapeMemes() {
   try {
     const url = `https://memegen-link-examples-upleveled.netlify.app/`;
     const { data } = await axios.get(url);
 
     const $ = cheerio.load(data);
-
-    const memeImages = [];
-    const fileNames = [];
-
-    if (!fs.existsSync('memes')) {
-      fs.mkdirSync('memes');
-    }
 
     $('#images div a').each((i, elem) => {
       const memeImage = $(elem).find('img').attr('src');
@@ -35,11 +35,9 @@ async function scrapeMemes() {
         fileNames.push(fileName);
       }
     });
-
-    return memeImages;
   } catch (error) {
     console.log(error);
   }
 }
 
-scrapeMemes();
+await scrapeMemes();
