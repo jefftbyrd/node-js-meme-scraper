@@ -12,6 +12,10 @@ async function scrapeMemes() {
     const memeImages = [];
     const fileNames = [];
 
+    if (!fs.existsSync('memes')) {
+      fs.mkdirSync('memes');
+    }
+
     $('#images div a').each((i, elem) => {
       const memeImage = $(elem).find('img').attr('src');
       let fileName = i++;
